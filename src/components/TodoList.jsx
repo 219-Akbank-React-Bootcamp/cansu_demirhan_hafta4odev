@@ -1,58 +1,48 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
-import Filter from "./Filter";
 
-function TodoList({ categories }) {
-  const [todos, setTodos] = useState([]);
+function TodoList({
+  categories,
+  addTodo,
+  isFiltered,
+  todos,
+  completeTodo,
+  removeTodo,
+  updateTodo,
+}) {
+  const [updateId, setUpdateId] = useState("");
 
-  const addTodo = (todo) => {
-    if (!todo.text || /^\s*$/.test(todo.text)) {
-      return;
+  const handleUpdateId = (id) => setUpdateId(id);
+  const handleCancelUpdate = () => setUpdateId("");
+
+  const handleTodoProcess = (todo) => {
+    if (updateId) {
+      updateTodo(todo);
+    } else {
+      addTodo(todo);
     }
-
-    const newTodos = [todo, ...todos];
-
-    setTodos(newTodos);
-    console.log(...todos);
+    handleCancelUpdate();
   };
 
-  const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
-      return;
-    }
-
-    setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
-    );
-  };
-
-  const removeTodo = (id) => {
-    const removedArr = [...todos].filter((todo) => todo.id !== id);
-
-    setTodos(removedArr);
-  };
-
-  const completeTodo = (id) => {
-    let updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
+  const todoToUpdate = todos.find((todo) => todo.id === updateId);
 
   return (
     <>
-      <h1>What's the Plan for Today?</h1>
-      <Filter />
-      <TodoForm onSubmit={addTodo} categories={categories} />
+      <TodoForm
+        todo={todoToUpdate}
+        categories={categories}
+        onSubmit={handleTodoProcess}
+        onCancel={handleCancelUpdate}
+      />
       <Todo
+        isFiltered={isFiltered}
         todos={todos}
+        categories={categories}
         completeTodo={completeTodo}
         removeTodo={removeTodo}
-        updateTodo={updateTodo}
+        updateTodo={handleUpdateId}
       />
     </>
   );

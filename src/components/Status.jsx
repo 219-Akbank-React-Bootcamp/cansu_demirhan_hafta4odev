@@ -3,15 +3,25 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
 const Status = (props) => {
-  return props.status.map((todo, index) => (
-    <div className="todo-row" key={index}>
-      <div key={todo.id}>{todo.text}</div>     
+  return props.status.map((statu) => (
+    <div
+      className="todo-row"
+      key={statu.id}
+      style={{
+        background: statu.color,
+        color: props.isDarkText ? "#000" : "#FFF",
+      }}
+    >
+      <div>{statu.text}</div>
       <div className="icons">
         <RiCloseCircleLine
-          onClick={() => props.removeCategory(todo.id)}
+          onClick={() => props.removeStatu(statu.id)}
           className="delete-icon"
         />
-        <TiEdit className="edit-icon" />
+        <TiEdit
+          onClick={() => props.updateStatu(statu.id)}
+          className="edit-icon"
+        />
       </div>
     </div>
   ));

@@ -16,7 +16,7 @@ body {
 .todo-app {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   width: 1000px;
   min-height: 600px;
   background: #161a2b;
@@ -90,33 +90,12 @@ h1 {
   width: 90%;
 }
 
-/* .todo-row:nth-child(4n + 1) {
-  background: linear-gradient(
-    90deg,
-    rgba(93, 12, 255, 1) 0%,
-    rgba(155, 0, 250, 1) 100%
-  );
+.todo-actions {
+  display: flex;
+  gap: 1rem;
 }
-
-.todo-row:nth-child(4n + 2) {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 12, 241, 1) 0%,
-    rgba(250, 0, 135, 1) 100%
-  );
-}
-
-.todo-row:nth-child(4n + 3) {
-  background: linear-gradient(
-    90deg,
-    rgba(20, 159, 255, 1) 0%,
-    rgba(17, 122, 255, 1) 100%
-  );
-} */
 
 .icons {
-  display: flex;
-  align-items: center;
   font-size: 24px;
   cursor: pointer;
 }
@@ -173,12 +152,11 @@ h1 {
     rgba(93, 12, 255, 1) 0%,
     rgba(155, 0, 250, 1) 100%
   );
-   padding: 6px; 
+  padding: 6px;
   color: #fff;
   border: 2px solid #5d0cff;
   width: 100px;
   border-radius: 4px;
-   margin-left: 480px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -221,16 +199,36 @@ h1 {
   color: #fff;
   text-transform: capitalize;
 }
-.add-category-input {
+.add-category-input,
+.add-color-input,
+.add-statu-input {
   margin: 10px auto;
   margin-top: 60px;
   padding: 14px 32px 14px 15px;
   border-radius: 4px 0 0 4px;
   border: 2px solid #5d0cff;
   outline: none;
-  width: 320px;
+  width: 265px;
   background: transparent;
   color: #161a2b;
+}
+.add-color-input {
+  width: 260px;
+}
+.add-statu-button {
+  width: 70px;
+  padding: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgba(155, 0, 250, 1) 100%
+  );
+  color: #fff;
+  text-transform: capitalize;
 }
 .modal {
   display: block;
@@ -240,13 +238,41 @@ h1 {
   height: 700px;
   max-height: 100%;
   position: fixed;
-  /* z-index: 100; */
   left: 50%;
   top: 50%;
-  /* Use this for centering if unknown width/height */
   transform: translate(-50%, -50%);
   background: white;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+}
+h2 {
+  margin: 80px 0;
+  color: #fff;
+  font-size: 30px;
+}
+.yesnomodal {
+  display: block;
+  border-radius: 6px;
+  width: 600px;
+  max-width: 100%;
+  height: 400px;
+  max-height: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #161a2b;
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+}
+.yes,
+.no {
+  width: 200px;
+  height: 50px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 4px;
+  background: #5d0cff;
+  font-size: 20px;
 }
 
 .display-block {
@@ -255,4 +281,12 @@ h1 {
 
 .display-none {
   display: none;
+}
+
+option {
+  color: black;
+}
+
+.w-50 {
+  width: 50%;
 }
